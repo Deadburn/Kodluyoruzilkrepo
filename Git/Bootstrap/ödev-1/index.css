@@ -1,0 +1,29 @@
+body {
+    text-align: center;
+    background-color:#E9ECEF;
+}
+
+h1 {
+    color:darkviolet;
+}
+
+h2 {
+    color:maroon;
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style-position: inside;
+}
+
+ol {
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2em;
+}
+
+
+
+
