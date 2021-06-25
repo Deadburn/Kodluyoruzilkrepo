@@ -160,7 +160,7 @@ div.card {
 }
 
 .card-header {
-  max-height: 80px;
+  max-height: 100px;
 }
 
 
@@ -275,6 +275,7 @@ button.ref:hover {
 .thediv {
   font-size: 14px; 
   color: #0a66c2;
+  width: ;
 }
 
 .list-content {
@@ -299,6 +300,8 @@ Mesajlaşma
 */
 
 .Navmesaj {
+  width: 300px;
+  background-color: white;
   height: 50px;
   position: -webkit-sticky;
   border-radius: 5px;
