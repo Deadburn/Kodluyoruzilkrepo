@@ -1,0 +1,319 @@
+.body {
+  margin: 0;
+  padding: 0;
+  background-color: #f3f2ef;
+}
+
+.navbarbg {
+  background-color: white;
+  overflow: hidden;
+  height: 70px;
+}
+
+.navi {
+  color: #0a66c2; 
+  font-size: 2.4rem; 
+  margin-left: 2.5em;
+}
+
+.navIcons {
+  color: black;
+  text-align: center;
+}
+
+.userIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.m-top {
+  margin-top: 150px;
+}
+
+.leftWidth {
+  width: 14rem;
+}
+
+.circ {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.text {
+  margin-bottom: 10px;
+  color: #5f5f5f;
+}
+
+.sayfalarım {
+  margin-bottom: -7px; 
+  font-size: 18px
+}
+
+.sayfa-img {
+  width: 32px; 
+  height: 32px
+}
+
+.sayfa-text {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: -35px;
+  margin-left: 37px;
+}
+
+.sayfa-bild {
+  font-size: 13px;
+  font-weight: bold;
+  color: gray;
+  margin-left: 38px;
+}
+
+input.searche {
+  height: 36px;
+  max-width: 500px;
+  background-color: #eef3f8;
+  border: 0;
+  text-align:center;
+}
+
+input.searche::placeholder {
+  font-size: 14px;
+  color: gray;
+  background-image: url(../assets/search-solid.svg);
+  background-repeat: no-repeat;
+  background-size: 9%;
+}
+
+input.content {
+  border-radius: 40px;
+  height: 45px;
+}
+input.content::placeholder {
+  font-weight: bolder;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url(../assets/edit-regular.svg);
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+
+.menutext {
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: gray;
+  margin-top: 5px;
+  font-weight: lighter;
+}
+
+.menutext:hover {
+  color: black;
+}
+
+button.mediatext {
+  color: #5f5f5f;
+}
+
+button.mediatext:hover {
+  color: #5f5f5f;
+}
+
+#fotograf {
+  fill:turquoise;
+}
+
+#video {
+  fill: green;
+}
+
+#takvim {
+  fill:orange;
+}
+
+#yazı {
+  fill:orangered;
+  
+}
+
+
+.mediatext {
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #5f5f5f;
+}
+
+i {
+  color: gray;
+  margin-top: 8px;
+}
+i:hover {
+  color: black;
+}
+
+
+
+div.card {
+  border-radius: 10px;
+}
+
+.card-header {
+  max-height: 80px;
+}
+
+
+
+.header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.view {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #5f5f5f;
+}
+
+.categories {
+  font-size: 13px;
+  font-weight: bold;
+  color: #0a66c2;
+}
+
+li {
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+}
+
+.link {
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #5f5f5f;
+}
+
+button.ref {
+  color: white;
+  font-size: 1.2rem"
+}
+
+button.ref:hover {
+  color: #5f5f5f;
+}
+
+.postphoto {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+.posttext {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 8px;
+  
+}
+
+
+/*Content Header*/
+
+.name {
+  color: #212529;
+}
+
+.job {
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+  font-size: 13px; 
+  color: #474747; 
+  overflow:hidden;
+}
+
+.timezone {
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  color: #474747;
+}
+
+.card-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+  font-size: 15px; 
+  color: black;
+}
+
+.love {
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+  font-size: 13px; 
+  color: #474747;
+}
+
+/*Right Content 1*/
+
+.akis-img,
+.follow {
+  border-radius: 50%;
+}
+
+.akis-text {
+  font-size: 14px
+}
+
+.akis-img {
+  width: 50px; 
+  height: 50px; 
+}
+
+/*Right Content 2*/
+
+.thediv {
+  font-size: 14px; 
+  color: #0a66c2;
+}
+
+.list-content {
+  font-weight: lighter;
+  font-size: 13px;
+  color: #5f5f5f;
+}
+
+.bottomdiv {
+  color: #0a66c2; 
+  font-size: 15px; 
+  margin-top: -25px;
+}
+
+.enalt {
+  font-size: 12px; 
+  margin-left: -15px;
+}
+
+/*
+Mesajlaşma
+*/
+
+.Navmesaj {
+  height: 50px;
+  position: -webkit-sticky;
+  border-radius: 5px;
+  margin-left: auto;
+  right: 15px;
+}
+
+.msgImg {
+  width: 30px;
+  height: 30px; 
+  border-radius: 50%;
+}
+
+.msgText {
+  font-size: 14px; 
+  font-weight: bold; 
+  font-family:Arial, Helvetica, sans-serif;
+}
