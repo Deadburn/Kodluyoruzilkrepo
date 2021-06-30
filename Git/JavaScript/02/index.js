@@ -1,5 +1,5 @@
 // ***************Template Literals**********************
-
+/*
 let username = "Cihan"
 const DOMAIN = "kodluyoruz.org"
 
@@ -12,11 +12,11 @@ mail adresinin uzunluğu: ${email.length}
 borcunuz: ${(2 + 3) * 5} TL
 günün saat bilgisi: ${new Date().getHours()}
 `
+*/
 
-console.log(info)
 
 
-/*************String Veri Türü İşlemleri*/
+/*************String Veri Türü İşlemleri
 console.log("**************-Strings-*********************")
 
 email = "cihan5421@gmail.com"
@@ -65,9 +65,70 @@ console.log(ends)
 let fullName = `${firstName[0].toUpperCase()}${firstName.slice(1)}
 ${lastName[0].toUpperCase()}${lastName.slice(1).toLowerCase()}`
 console.log(fullName)
+*/
+
+/*
+// pathname
+console.log(document.location.pathname)
+
+
+console.log(document.head)
+console.log(document.body)
+
+document.body.style.backgroundColor = "aqua"
+*/
+
+/*
+
+let title = document.getElementById('title')
+title.innerHTML = "Değişen Bilgi"
+console.log(title.innerHTML)
+
+
+let link = document.querySelector('ul#list>li>a')
+link.innerHTML += ": Hyperlink"
+link.style.color = "blue"
+link.classList.add('btn') // class eklemek.
+*/
+
+
+/*********************Prompt*********** */
+/*
+let fullName = prompt("Lütfen Adınızı Giriniz:")
+
+let greeting = document.querySelector("#greeting")
+
+greeting.innerHTML = `${greeting.innerHTML}
+<small style="color:red">${fullName}</small>`
+*/
 
 
 
+/**********************Listeler*********************** */
+/*
+let lastChild = document.querySelector("ul#list>li:last-child")
+lastChild.innerHTML = "son oge volkan öge..."
+
+let firstChild = document.querySelector("ul#list>li:first-child")
+firstChild.innerHTML = "ilk öge..."
+
+let ulDOM = document.querySelector("ul#list")
+let liDOM = document.createElement('li')
+
+liDOM.innerHTML = "Kendi oluşturduğumuz öğe"
+//ulDOM.appendChild(liDOM) en sona ekliyor
+//ulDOM.prepend(liDOM) // Başa ekliyor.
+*/
 
 
+/******************Class ekle veya çıkar****************************/
+
+let greeting = document.querySelector('#greeting')
+greeting.classList.add("text-primary")
+greeting.classList.add("title")
+greeting.classList.add("new-info", "second-class", "third-class")
+
+greeting.classList.remove("title", "second-class", "third-class")
+
+console.log(greeting.classList)
 
