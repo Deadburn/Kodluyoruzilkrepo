@@ -53,7 +53,7 @@ cerceve.addEventListener('click', function(){
 
 /**********************Function Bölüm Sonu Egzersizi******************/ 
 
-let counter = 0
+let counter = localStorage.getItem('counter') ? Number(localStorage.getItem('counter')) : 0
 let counterDOM = document.querySelector('#counter')
 let increaseDOM = document.querySelector('#increase')
 let decreaseDOM = document.querySelector('#decrease')
@@ -62,11 +62,12 @@ counterDOM.innerHTML = counter
 
  
 function clickEvent(){
-    console.log(this.id)
-    this.id === "increase" ? counter+= 1 : counter-= 1
     
-    counterDOM.innerHTML = counter    
+    this.id === "increase" ? counter+= 1 : counter-= 1
+    localStorage.setItem('counter', parseInt(counter))
+    counterDOM.innerHTML = counter 
 }
 
 decreaseDOM.addEventListener("click", clickEvent)
 increaseDOM.addEventListener("click", clickEvent)
+
