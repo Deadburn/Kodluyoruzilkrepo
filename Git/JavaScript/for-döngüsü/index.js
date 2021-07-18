@@ -77,9 +77,83 @@ let users = ["Lorem", "Ipsum", "Dolor"]
 //     counter++
 // }
 
-let userName
+// let userName
 
-while(!userName){
-    userName = prompt("Kullanıcı adını giriniz: ")
-    console.log(userName)
-}
+// while(!userName){
+//     userName = prompt("Kullanıcı adını giriniz: ")
+//     console.log(userName)
+// }
+
+
+// const PRODUCTS = ["Laptop", "Phone", "Speaker", "Desktop PC", "Server", "Mouse", "Keyboard"]
+// //PRODUCTS.forEach((product, index, array) => array[index] = product + " 111" )
+// PRODUCTS.forEach((product, index, array) => array[index] = `${product.toUpperCase()}` )
+
+// console.log(PRODUCTS)
+
+
+// const userListDOM = document.querySelector('#userList')
+// PRODUCTS.forEach((item) => {
+//     const liDOM = document.createElement('li')
+//     liDOM.innerHTML = item
+//     userListDOM.append(liDOM)
+// })
+
+/************Filter (5 ve daha büyük olan itemler)*/
+// const PRODUCTS = ["Mic", "Cable", "Speaker", "Desktop PC", "Server", "Mouse", "Keyboard"]
+
+// const NEW_PRODUCTS = PRODUCTS.filter(item => item.length > 5)
+// console.log(NEW_PRODUCTS)
+
+// // aktif kullanıcılar
+// const USERS = [
+//     {fullName: "Ayse Sumer", isActive: false},
+//     {fullName: "Ahmet Urgan", isActive: true},
+//     {fullName: "Asya Basar", isActive: true},
+//     {fullName: "Aksel Durmaz", isActive: false},
+// ]
+
+// // aktif kullanıcılar
+// const ACTIVE_USERS = USERS.filter(user => user.isActive)
+// console.log(ACTIVE_USERS)
+
+// const person = [{
+//     name: "Adem",
+//     age: 25,
+//     languages: ["JavaScript", "CSS"],
+//   },
+//   {
+//     name: "Oğuz",
+//     age: 33,
+//     languages: ["Java", "HTML"],
+//     }
+//   ];
+
+// const Yasli = person.filter(kisi => kisi.age > 30)
+// console.log(Yasli)
+
+// const JS = person.filter(kisi => kisi.languages.includes("JavaScript"))
+// console.log(JS)
+
+const USERS = ["AYSE", "MehMet", "TugCE", "AkSEL"]
+
+const NEW_USERS = USERS.map( user => user.toLocaleLowerCase())
+console.log(NEW_USERS)
+
+// const USERS_OBJ = USERS.map( item =>  
+//     {
+//         return {
+//             userName: item, shortName: `${item[0]}.`, newName: `${item[0].toUpperCase()}${item.slice(1).toLowerCase()}`
+//         }
+//     }
+// )
+
+//  Return'un doğuşu
+const USERS_OBJ = USERS.map( item =>  (
+    {
+      userName: item, shortName: `${item[0]}.`, newName: `${item[0].toUpperCase()}${item.slice(1).toLowerCase()}`
+ 
+    })
+)
+
+console.log(USERS_OBJ)
