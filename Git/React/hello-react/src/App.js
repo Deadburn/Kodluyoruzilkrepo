@@ -3,19 +3,22 @@ import React from 'react'
 
 import User from "./components/User"
 
-
 const friends = [
   {
     id: 1,
-    name: "Cihan",
+    name: 'Cihan'
   },
-  {
-    id: 2,
-    name: "Sefa",
+  { 
+    id:2,
+    name: 'Emir'
   },
   {
     id: 3,
-    name: "Gökhan",
+    name: 'Hasan'
+  },
+  {
+    id: 4,
+    name: 'Tayfun'
   },
 ]
 
@@ -26,18 +29,17 @@ function App(){
       <User 
         //name="Cihan"
         surname="Alıcı"
+        age={23}
         isLoggedIn={true}
-        age={29}
         friends={friends}
         address={{
-          title: "Ataşehir/Istanbul",
-          zip: 34755,
+          title: "Mezitli/Mersin",
+          zip: 33200,
         }}
-      
       />
-      
-    </>
+      </>
   )
 }
+
 
 export default App
