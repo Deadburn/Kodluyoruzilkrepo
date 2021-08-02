@@ -1,27 +1,18 @@
 import React from 'react'
 
-function Header({ setFilterText, filterText, todos,setTodo  }) {
-
-    const handleSubmit = (e) => {
-        const newTodos = [...todos]
-        newTodos[todos.length] = { id: todos.length, text: filterText, done: false  }
-        setTodo(newTodos)
-    }
-
-    
-
+function Header({ addTodo, handleSubmit, todoInput  }) {
     return (
-        <div className="header">
+        <header className="header">
             <h1>todos</h1>
-            <form onSubmit={handleSubmit}>
-                <input 
+            <form onSubmit={(e) => handleSubmit(e)}>
+                <input
                     className="new-todo"
                     placeholder="What needs to be done?"
-                    onChange={(e) => setFilterText(e.target.value)}
-                    autoFocus   
+                    onChange={(e) => addTodo(e.target.value)}
+                    value={todoInput} 
                 />
             </form>
-        </div>
+        </header>
     )
 }
 

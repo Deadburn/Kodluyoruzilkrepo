@@ -4,43 +4,40 @@ import Section from './Section/Section.js'
 import Footer from './Footer/Footer.js'
 
 function Todos() {
-    const [todos, setTodo] = useState([
-        { id: 1, text: "Learn Javascript", done: true},
-        { id: 2, text: "Learn React", done: false},
-        { id: 3, text: "Have a life", done: false },
-    ])
-    let filter
+    const [todoInput, setTodoInput] = useState("")
+    const [addedTodo, setAddedTodo] = useState("")
+    const [filter, setFilter] = useState("All")
+    const [todoLen, setTodoLen] = useState(0)
+    const [clear, setClear] = useState(false)
 
-    useEffect(()=>{},[todos])
+    const handleSubmit = (e) => {
+        setTodoInput("")
+        e.preventDefault()
+        setAddedTodo(todoInput)
+    }
 
-    const [filterText, setFilterText] = useState('') 
-    const [filterData, setFilterData] = useState('all')
-    
-    filter = todos.filter((item) => {
-        return Object.keys(item).some((key) => 
-        item[key]
-            .toString()
-            .toLowerCase()
-            .includes(filterText.toLowerCase))
-    })
-
-    filter = todos.filter((item) => {
-        if(filterData === "all"){
-            return todos
-        } else if(filterData === "active"){
-            return item.done === "false"
-        } else {
-            return item.done === "true"
-        }
-    })
+    useEffect(() => {
+        setTodoInput('')
+    },[addedTodo])
 
     return (
         <div className="todoapp"> 
-            <Header setFilterText={setFilterText} />
+            <Header
+                addTodo={setTodoInput}
+                handleSubmit={handleSubmit}
+                todoInput={todoInput}
+            />
             {/* <!-- This section should be hidden by default and shown when there are todos --> */}
-            <Section todos={filter} setTodo={setTodo} />
+            <Section 
+                addedTodo={addedTodo}
+                filter={filter}
+                setTodoLen={setTodoLen}
+                clear={clear}
+            />
             {/* <!-- This footer should hidden by default and shown when there are todos --> */}
-            <Footer todos={todos} setTodo={setTodo} filterData={filterData} setFilterData={setFilterData} />
+            <Footer 
+                setFilter={setFilter} todoLen={todoLen} setClear={setClear}
+            />
         </div>
     )
 }

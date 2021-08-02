@@ -1,15 +1,50 @@
-import React from 'react'
+import React,{useState, useEffect, memo} from 'react'
 
-function Section({ todos, setTodo }) {
-    const checkTodo = (index, todo) => {
-        const newTodos = [...todos]
-        newTodos[index] = {...todo, done: todo.done ? false : true}
-        setTodo(newTodos)
+import Todo from './Todo'
+
+function Section({ addedTodo, filter, setTodoLen, clear }) {
+    const [todos, setTodos] = useState([])
+
+    useEffect(() => {
+        if(addedTodo !== ""){
+            setTodos([...todos, {name: addedTodo, completed: false}])
+        }
+    },[addedTodo])
+
+    useEffect(() => {
+        setTodos(todos.filter((item) => item.completed === false))
+    }, [clear])
+
+    useEffect(() => {
+        let len
+        if(filter ==="Active"){
+            len = todos.filter((item) => item.completed === false)
+            setTodoLen(len.length)
+        } else if(filter === "Completed"){
+            len = todos.filter((item) => item.completed === true)
+            setTodoLen(len.length)
+        } else {
+            setTodoLen(todos.length)
+        }
+    }, [filter, todos])
+
+    const handleCheck = (i) => {
+        setTodos(
+            todos.map((item) => 
+                item.name === i.name ? {...item, completed: !i.completed} : item
+            )
+        )
     }
-    console.log(todos)
-    const deleteTodo = (todo) => {
-        const newTodos = todos.filter((t) => t !== todo)
-        setTodo(newTodos)
+
+    const handleRemoveItem = (name) => {
+        let newTodos = todos.filter((item) => item.name !== name)
+        console.log(todos)
+        setTodos(newTodos)
+    }
+
+    const handleMarkAll = () => {
+        let markedTodos = todos.map((a) => ({...a, completed:true}))
+        setTodos(markedTodos)
     }
 
     return (
@@ -18,31 +53,51 @@ function Section({ todos, setTodo }) {
                 className="toggle-all" 
                 type="checkbox"
             />
-            <label htmlFor="toggle-all">
+            <label htmlFor="toggle-all" onClick={() => handleMarkAll()}>
                 Mark as complete
             </label>
             
             <ul className="todo-list">
-                {todos.map((todo, index) => (
-                    <li key={index} className={todo.done ? "completed" : ""}>
-                        <div className="view">
-                            <input 
-                                className="toggle"
-                                type="checkbox"
-                                defaultChecked={todo.done}
-                                onChange={() => checkTodo(index, todo)}
+                {filter === "All" && 
+                    todos.map((i, j) => (
+                        <Todo
+                            key={j}
+                            handleRemoveItem={handleRemoveItem}
+                            handleCheck={handleCheck}
+                            i={i}
+                        />
+                    ))
+                }
+
+                {filter === "Active" && 
+                    todos.map((i,j) => (
+                        !i.completed && (
+                            <Todo
+                                key={j}
+                                handleRemoveItem={handleRemoveItem}
+                                handleCheck={handleCheck}
+                                i={i}
                             />
-                            <label>{todo.text}</label> 
-                            <button
-                                onClick={() => deleteTodo(todo)}
-                                className="destroy"
-                            ></button>
-                        </div>
-                    </li>
-                ))}
+                        )
+                    ))
+                }
+
+                {filter === "Completed" && 
+                    todos.map((i,j) => 
+                        i.completed && (
+                            <Todo 
+                                key={j}
+                                handleRemoveItem={handleRemoveItem}
+                                handleCheck={handleCheck}
+                                i={i}
+                            />
+                        )
+                     )
+                }
+
             </ul>
         </div>
     )
 }
 
-export default Section
+export default memo(Section)

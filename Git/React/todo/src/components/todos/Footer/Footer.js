@@ -1,48 +1,46 @@
-import React from 'react'
+import {memo} from 'react'
 
-function Footer({ todos, setTodo, filterData, setFilterData}) {
-    const allCompleted = () => {
-        const newTodos = []
-        setTodo(newTodos)
-    }
-
-
+function Footer({ setFilter, todoLen, setClear}) {
     return (
         <footer className="footer">
 
             {/* <!-- This should be `0 items left` by default --> */}
             <span className="todo-count">
-                <strong>{todos.length}</strong>
+                <strong>{todoLen}</strong>
                  items left
             </span>
 
             <ul className="filters">
                 <li>
                     <a 
-                    onClick={() => setFilterData("all")}
-                    className={filterData === "all" ? "selected" : null}
+                    href="#"
+                    onClick={() => setFilter("all")}
+                    className="selected"
                     >All</a>
                 </li>
                 <li>
-                    <a
-                        onClick={() => setFilterData("active")}
-                        className={filterData === "active" ? "selected" : null}    
+                    <a  
+                        href="#"
+                        onClick={() => setFilter("Active")}
                     >Active</a>
                 </li>
                 <li>
-                    <a
-                        onClick={() => setFilterData("completed")}
-                        className={filterData === "completed" ? "selected" : null}   
+                    <a  
+                        href="#"
+                        onClick={() => setFilter("Completed")} 
                     >Completed</a>
                 </li>
             </ul>
 
             {/* <!-- Hidden if no completed items are left ↓ --> */}
-            <button onClick={() => allCompleted()} className="clear-completed">
+            <button 
+                className="clear-completed"
+                onClick={() => setClear((prevState) => !prevState)} 
+            >
                 Clear completed
             </button>
         </footer>
     )
 }
 
-export default Footer
+export default memo(Footer)
