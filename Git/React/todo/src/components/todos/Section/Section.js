@@ -6,7 +6,7 @@ function Section({ todos, setTodo }) {
         newTodos[index] = {...todo, done: todo.done ? false : true}
         setTodo(newTodos)
     }
-
+    console.log(todos)
     const deleteTodo = (todo) => {
         const newTodos = todos.filter((t) => t !== todo)
         setTodo(newTodos)

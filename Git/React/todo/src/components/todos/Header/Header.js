@@ -1,21 +1,23 @@
-import {useState} from 'react'
+import React from 'react'
 
-function Header({ setFilterText, todos, setTodo  }) {
+function Header({ setFilterText, filterText, todos,setTodo  }) {
 
-    const handleChange = (e) => {
-        setTodo((e) => {
-           
-        })
+    const handleSubmit = (e) => {
+        const newTodos = [...todos]
+        newTodos[todos.length] = { id: todos.length, text: filterText, done: false  }
+        setTodo(newTodos)
     }
+
+    
 
     return (
         <div className="header">
             <h1>todos</h1>
-            <form >
+            <form onSubmit={handleSubmit}>
                 <input 
                     className="new-todo"
                     placeholder="What needs to be done?"
-                    onChange={handleChange}
+                    onChange={(e) => setFilterText(e.target.value)}
                     autoFocus   
                 />
             </form>
