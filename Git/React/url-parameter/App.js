@@ -3,6 +3,7 @@ import './App.css';
 import Home from './components/Home/Home'
 import Users from './components/Users/Users'
 import About from './components/About/About'
+import User from './components/User/User'
 
 import {
   BrowserRouter as Router,
@@ -30,11 +31,10 @@ function App() {
         </nav>
 
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
-
           <Route path="/users" component={Users} />
-
-          <Route path="/" component={Home} />
+          <Route path="/user/:id" component={User} />
         </Switch>
       </div>
     </Router>
