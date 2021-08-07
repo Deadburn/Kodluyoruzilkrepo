@@ -1,13 +1,13 @@
-import React from 'react'
+import React,{useContext} from 'react'
 
 import Button from "./Button";
 import Header from "./Header";
 import Profile from './Profile';
 
-import {useTheme} from '../context/ThemeContext';
+import ThemeContext from '../context/ThemeContext';
 
 function Container() {
-    const {theme} = useTheme()
+    const {theme} = useContext(ThemeContext)
 
 
 
