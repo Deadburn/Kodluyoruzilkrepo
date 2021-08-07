@@ -1,17 +1,15 @@
 import "./App.css";
 import Container from "./components/Container";
 
-import {ThemeProvider} from "./context/ThemeContext";
-import {UserProvider} from "./context/UserContext";
+
+import {WeatherProvider} from "./context/WeatherContext";
 
 function App() {
 
   return (
-      <ThemeProvider>
-        <UserProvider>
+      <WeatherProvider>
         <Container />
-        </UserProvider>
-      </ThemeProvider>
+      </WeatherProvider>
   );
 }
 

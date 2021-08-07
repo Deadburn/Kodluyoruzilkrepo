@@ -1,0 +1,32 @@
+{
+  "coord": { "lon": 34.6509, "lat": 36.862 },
+  "weather": [
+    { "id": 800, "main": "Clear", "description": "clear sky", "icon": "01d" }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 304.79,
+    "feels_like": 311.52,
+    "temp_min": 304.79,
+    "temp_max": 304.79,
+    "pressure": 1002,
+    "humidity": 67,
+    "sea_level": 1002,
+    "grnd_level": 994
+  },
+  "visibility": 10000,
+  "wind": { "speed": 4.61, "deg": 184, "gust": 4.49 },
+  "clouds": { "all": 2 },
+  "dt": 1628346855,
+  "sys": {
+    "type": 1,
+    "id": 6946,
+    "country": "TR",
+    "sunrise": 1628304706,
+    "sunset": 1628354556
+  },
+  "timezone": 10800,
+  "id": 311728,
+  "name": "Mersin Province",
+  "cod": 200
+}
