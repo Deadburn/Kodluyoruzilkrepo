@@ -5,7 +5,7 @@ import { useWeather } from "../context/WeatherContext";
 
 
 function Weather() {
-    const { weather, city, icon, coord, setCoord } = useWeather();
+    const { city, coord } = useWeather();
     const [daily, setDaily] = useState([])
 
     const {lat, lon} = coord
@@ -15,7 +15,7 @@ function Weather() {
       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=d5b81d6550a1c141a666272a5c71400f`)
       .then((res) => res.json())
       .then((data) => setDaily(data.daily))
-    },[city])
+    },[lat, lon])
 
     // console.log(daily[0] ? daily[0] : null)
 

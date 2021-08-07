@@ -5,7 +5,7 @@ import { useWeather } from "../context/WeatherContext";
 import Weather from "./Weather";
 
 function Container() {
-  const { weather, setWeather, city, setCity } = useWeather();
+  const { city, setCity } = useWeather();
 
   const sehirler = [
     "Adana",
