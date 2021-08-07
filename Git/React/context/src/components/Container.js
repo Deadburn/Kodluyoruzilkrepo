@@ -93,14 +93,15 @@ function Container() {
 
   return (
     <div className="app">
-      <select value={city} onChange={(e) => setCity(e.target.value)}>
-        {sehirler.map((sehir, i) => (
-          <option key={i} value={sehir}>
-            {sehir}
-          </option>
-        ))}
-      </select>
-
+      <div className="option">
+        <select value={city} onChange={(e) => setCity(e.target.value)}>
+          {sehirler.map((sehir, i) => (
+            <option key={i} value={sehir} >
+              {sehir}
+            </option>
+          ))}
+        </select>
+      </div>
       <br />
 
       <Weather />

@@ -1,8 +1,24 @@
-.app {
-  height: 100vh;
-  
+*{
+  box-sizing: content-box;
+}
+
+.option {
+  padding: 5px 2px 3px 7px;
 }
 
 p {
-  margin-left: 25px;;
+  margin-left: 25px;
+}
+
+.weather {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+
+.weather-weekly {
+  border: 3px solid lightskyblue;
 }
