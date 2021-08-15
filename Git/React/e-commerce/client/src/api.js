@@ -1,8 +1,26 @@
-export const fetchProductList = async() => {
-    const res = await fetch("http://localhost:4000/product")
-    const data = await res.json()
+import axios from "axios";
 
-    console.log(data)
-    
-    return data
-} 
+export const fetchProductList = async ({ pageParam = 1 }) => {
+  const { data } = await axios.get(
+    `${process.env.REACT_APP_BASE_ENDPOINT}/product?page=${pageParam}`
+  );
+
+  return data;
+};
+
+export const fetchProduct = async (id) => {
+  const { data } = await axios.get(
+    `${process.env.REACT_APP_BASE_ENDPOINT}/product/${id}`
+  );
+
+  return data;
+};
+
+export const fetchRegister = async (input) => {
+  const { data } = await axios.post(
+    `${process.env.REACT_APP_BASE_ENDPOINT}/auth/register`,
+    input
+  );
+
+  return data
+};

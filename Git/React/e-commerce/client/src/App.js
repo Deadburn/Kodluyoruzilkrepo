@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Signin from "./Pages/Auth/Signin/index"
 import Signup from "./Pages/Auth/Signup";
 import Products from "./Pages/Products";
+import ProductDetail from "./Pages/ProductDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <div className="content">
         <Switch>
           <Route path="/" exact component={Products} />
+          <Route path="/product/:product_id" component={ProductDetail} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
         </Switch>
