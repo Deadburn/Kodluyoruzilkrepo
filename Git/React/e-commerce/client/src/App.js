@@ -14,6 +14,7 @@ import ProductDetail from "./Pages/ProductDetail";
 import Profile from "./Pages/Profile";
 import Basket from "./Pages/Basket";
 import Error404 from "./Pages/Error404";
+import Admin from "./Pages/Admin";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/signup" component={Signup} />
           <Route path="/basket" component={Basket} />
+          <ProtectedRoute path="/admin" component={Admin} admin={true} />
           <ProtectedRoute path="/profile" component={Profile} />
           <Route path="*" component={Error404} />
         </Switch>
