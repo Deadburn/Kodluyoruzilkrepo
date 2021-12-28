@@ -1,14 +1,11 @@
 
 import './App.css';
-
-import {Button, Paragraph} from 'deadburn-package'
-import 'deadburn-package/dist/index.css'
+import { Btn } from "deadburn-package"
 
 function App() {
   return (
     <div className="App">
-        <Paragraph text="minor değişiklik yapıldı" />
-        <Button text="click" />
+      <Btn text="click" type="primary" />
     </div>
   );
 }
