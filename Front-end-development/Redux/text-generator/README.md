@@ -4,4 +4,4 @@
 
 
 
-![text-generator](https://user-images.githubusercontent.com/80601286/147790579-30ea9522-f9b6-4d2e-add4-9808db7b2937.png)
+![react-text-generator](https://user-images.githubusercontent.com/80601286/147790624-59879ca6-00f3-43d5-b058-2d183629f136.png)
