@@ -1,0 +1,49 @@
+.App {
+  text-align: center;
+}
+
+
+.header {
+  margin-top: 0;
+  color: white;
+  font-size: 58px;
+  font-weight:400;
+}
+
+.hr {
+  width: 85%;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  margin-right: 30px;
+  text-align: left;
+}
+
+.label {
+  color: white;
+}
+
+.inputBox {
+  height: 20px;
+}
+
+.selectBox {
+  height: 25px;
+}
+
+.text {
+  margin: 0 auto;
+  margin-top: 45px;
+  width: 80%;
+  text-align: left;
+  background-color: #444;
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
