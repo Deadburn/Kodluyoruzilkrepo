@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const ejs = require("ejs");
 const path = require("path");
 const Post = require("./models/Post");
+const postController = require("./controllers/postControllers");
+const pageController = require('./controllers/pageControllers')
 
 const app = express();
 
@@ -19,6 +22,12 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// override with POST having ?_method=DELETE
+app.use(
+  methodOverride("_method", {
+    methods: ["POST", "GET"],
+  })
+);
 
 // ROUTES
 // app.get("/", (req, res) => {
@@ -27,32 +36,19 @@ app.use(express.json());
 //   res.send(blog);
 // });
 
-app.get("/", async (req, res) => {
-  const posts = await Post.find({});
-  res.render("index", { posts });
-});
+app.get("/", postController.getAllPosts);
+app.get("/posts/:id", postController.getPost);
+app.post("/posts", postController.createPost);
+app.put("/posts/:id", postController.updatePost);
+app.delete("/posts/:id", postController.deletePost);
 
-app.get("/posts/:id", async (req, res) => {
-  const post = await Post.findById(req.params.id)
-  res.render("post", { post });
-});
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+app.get("/about", pageController.getAbout);
 
-app.get("/add_post", (req, res) => {
-  res.render("add_post");
-});
+app.get("/add_post", pageController.addPost);
 
-app.get("/post", (req, res) => {
-  res.render("post");
-});
 
-app.post("/posts", async (req, res) => {
-  await Post.create(req.body);
-  res.redirect("/");
-});
+app.get("/posts/edit/:id", pageController.getEditPage);
 
 const port = 3000;
 app.listen(port, () => {
