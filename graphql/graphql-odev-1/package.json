@@ -1,0 +1,19 @@
+{
+  "name": "graphql-odev-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "apollo-server": "^3.9.0",
+    "apollo-server-core": "^3.9.0"
+  }
+}
