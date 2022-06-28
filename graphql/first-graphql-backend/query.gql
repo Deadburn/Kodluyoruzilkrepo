@@ -1,0 +1,40 @@
+query getAllBooks{ 
+  books{
+    id
+    title
+  } 
+} 
+
+query getBook{
+  book (id: "1"){
+    id
+    title
+    author_id
+    author {
+      id
+      name
+      surname
+    }
+  }
+}
+
+query getAllAuthors{
+  authors{
+    id
+    name
+    surname
+  }
+}
+
+
+query getAuthor{
+  author(id: "1"){
+    id
+    name
+    surname
+    books(filter:"yabancı"){
+      id
+      title
+  	}
+  }
+}
