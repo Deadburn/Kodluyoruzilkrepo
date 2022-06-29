@@ -1,5 +1,6 @@
 {
   "name": "graphql-comments",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "data.js",
@@ -15,6 +16,7 @@
   "dependencies": {
     "apollo-server": "^3.9.0",
     "apollo-server-core": "^3.9.0",
-    "graphql": "^16.5.0"
+    "graphql": "^16.5.0",
+    "nanoid": "^4.0.0"
   }
 }

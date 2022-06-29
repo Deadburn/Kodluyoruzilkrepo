@@ -1,8 +1,8 @@
-const { ApolloServer, gql } = require("apollo-server");
-const { users, posts, comments } = require("./data");
-const {
-  ApolloServerPluginLandingPageGraphQLPlayground,
-} = require("apollo-server-core");
+import { ApolloServer, gql } from "apollo-server";
+import { users, posts, comments } from "./data.js";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+//add nanoid package
+import { nanoid } from "nanoid";
 
 const typeDefs = gql`
   type User {
@@ -41,9 +41,55 @@ const typeDefs = gql`
     comments: [Comment!]!
     comment(id: ID!): Comment!
   }
+
+  type Mutation {
+    # User
+    createUser(fullName: String!): User!
+    # Post
+    createPost(title: String!, user_id: ID!): Post!
+    # Comment
+    createComment(text: String!, post_id: ID!, user_id: ID!): Comment!
+  }
 `;
 
 const resolvers = {
+  Mutation: {
+    createUser: (parent, { fullName }) => {
+      const user = {
+         id: nanoid(),
+         fullName 
+        };
+
+      users.push(user);
+
+      return user;
+    },
+    createPost: (parent, { title, user_id }) => {
+
+      const post = {
+        id: nanoid(),
+        title,
+        user_id
+      };
+
+      posts.push(post);
+
+      return post;
+
+    },
+    createComment: (parent, { text, post_id, user_id}) => {
+      const comment = {
+        id: nanoid(),
+        text,
+        post_id,
+        user_id
+      };
+
+      comments.push(comment);
+
+      return comment;
+    }
+  },
   Query: {
     // user
     users: () => users,
@@ -55,22 +101,23 @@ const resolvers = {
 
     // comment
     comments: () => comments,
-    comment: (parent, args) => comments.find((comment) => comment.id === args.id),
+    comment: (parent, args) =>
+      comments.find((comment) => comment.id === args.id),
   },
-
   User: {
     posts: (parent, args) => posts.filter((post) => post.user_id === parent.id),
-    comments: (parent) => comments.filter((comment) => comment.user_id === parent.id)
+    comments: (parent) =>
+      comments.filter((comment) => comment.user_id === parent.id),
   },
   Post: {
     user: (parent) => users.find((user) => user.id === parent.user_id),
-    comments: (parent) => comments.filter((comment) => comment.post_id === parent.id)
+    comments: (parent) =>
+      comments.filter((comment) => comment.post_id === parent.id),
   },
   Comment: {
-    user: (parent) => users.find(user => user.id === parent.user_id),
-    post: (parent) => posts.find(post => post.id === parent.post_id)
-  }
-
+    user: (parent) => users.find((user) => user.id === parent.user_id),
+    post: (parent) => posts.find((post) => post.id === parent.post_id),
+  },
 };
 
 const server = new ApolloServer({

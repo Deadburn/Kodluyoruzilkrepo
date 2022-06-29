@@ -1,4 +1,4 @@
-const users = [
+export const users = [
   {
     id: "1",
     fullName: "Cihan Alıcı",
@@ -9,7 +9,7 @@ const users = [
   },
 ];
 
-const posts = [
+export const posts = [
   {
     id: "1",
     title: "Cihan'ın gönderisi",
@@ -27,7 +27,7 @@ const posts = [
   },
 ];
 
-const comments = [
+export const comments = [
   {
     id: "1",
     text: "Bu umutun yorumudur",
@@ -54,8 +54,3 @@ const comments = [
   },
 ];
 
-module.exports = {
-  users,
-  posts,
-  comments,
-};

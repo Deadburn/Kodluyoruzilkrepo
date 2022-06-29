@@ -85,3 +85,58 @@ query {
     }
   }
 }
+
+
+
+# add querys
+
+mutation addNewUser {
+  createUser(fullName:"Murat") {
+    id
+    fullName
+    comments {
+      text
+    }
+    posts {
+      title
+    }
+  }
+}
+
+mutation addNewPost{
+  createPost(
+    title: "Bu ikinci post mutation üzerinden eklenmiştir."
+    user_id: "1"
+  ) {
+    id
+    title
+    user{
+      id
+      fullName
+      posts {
+      title
+       }
+    }
+    
+  }
+}
+
+mutation addComment {
+  createComment(
+    text: "Selam nasılsın? burnun kapıya kısılsın v2"
+    user_id: "1"
+    post_id: "1"
+  ) {
+    id
+    text
+    user {
+      id
+      fullName
+    }
+    post {
+      id
+      title
+      
+    }
+  }
+}
