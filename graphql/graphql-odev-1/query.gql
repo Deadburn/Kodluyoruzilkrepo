@@ -1,0 +1,88 @@
+query getAllUsers {
+  users{
+    id
+    username
+    email
+  }
+}
+
+query getUser {
+  user (id:"1"){
+    username
+    email
+  }
+}
+
+query getAllEvents {
+  events {
+    id
+    title
+  }
+}
+
+query getKarmaEvents {
+  events {
+    id
+    title
+    user_id
+    location_id
+    user{
+      id
+      username
+    }
+    participants{
+      id
+      user_id
+      event_id
+    }
+    location {
+      id
+      name
+    }
+  }
+}
+
+
+query getEvent {
+  event (id:"1"){
+    title
+    date
+  }
+}
+
+query getAllLocations {
+  locations{
+    id
+    name
+    lat
+    lng
+  }
+}
+
+query getLocation {
+  location(id: "2"){
+    id
+    name
+    lat
+    lng
+  }
+}
+
+query getAllParticipants {
+  participants{
+    id
+    user_id
+    event_id
+  }
+}
+
+query getParticipant {
+  participant(id: "2"){
+    id
+    user_id
+  }
+}
+
+ 
+
+  
