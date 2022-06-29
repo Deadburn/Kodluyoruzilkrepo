@@ -5,6 +5,8 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-co
 import { nanoid } from "nanoid";
 
 const typeDefs = gql`
+
+  # User type definition
   type User {
     id: ID!
     fullName: String!
@@ -12,6 +14,12 @@ const typeDefs = gql`
     comments: [Comment!]!
   }
 
+  input CreateUserInput {
+    fullName: String!
+  }
+
+
+  # Post type definition
   type Post {
     id: ID!
     title: String!
@@ -20,12 +28,24 @@ const typeDefs = gql`
     comments: [Comment!]!
   }
 
+  input CreatePostInput {
+    title: String!
+    user_id: ID!
+  }
+
+  # Comment type definition
   type Comment {
     id: ID!
     text: String!
     post_id: ID!
     user: User!
     post: Post!
+  }
+
+  input CreateCommentInput {
+    text: String! 
+    post_id: ID!
+    user_id: ID!
   }
 
   type Query {
@@ -44,32 +64,31 @@ const typeDefs = gql`
 
   type Mutation {
     # User
-    createUser(fullName: String!): User!
+    createUser(data: CreateUserInput!): User!
     # Post
-    createPost(title: String!, user_id: ID!): Post!
+    createPost(data: CreatePostInput!): Post!
     # Comment
-    createComment(text: String!, post_id: ID!, user_id: ID!): Comment!
+    createComment(data: CreateCommentInput!): Comment!
   }
 `;
 
 const resolvers = {
   Mutation: {
-    createUser: (parent, { fullName }) => {
+    createUser: (parent, { data }) => {
       const user = {
          id: nanoid(),
-         fullName 
+         ...data,
         };
 
       users.push(user);
 
       return user;
     },
-    createPost: (parent, { title, user_id }) => {
+    createPost: (parent, { data }) => {
 
       const post = {
         id: nanoid(),
-        title,
-        user_id
+        ...data,
       };
 
       posts.push(post);
@@ -77,12 +96,10 @@ const resolvers = {
       return post;
 
     },
-    createComment: (parent, { text, post_id, user_id}) => {
+    createComment: (parent, { data }) => {
       const comment = {
         id: nanoid(),
-        text,
-        post_id,
-        user_id
+        ...data,
       };
 
       comments.push(comment);
