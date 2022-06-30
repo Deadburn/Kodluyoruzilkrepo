@@ -133,14 +133,14 @@ mutation createEvent {
     data: {
       title: "new Event"
       desc: "new event desc"
-      date: "12.01.2021"
+      date: "12.01.2021a"
     }
   ){
     id
     title
     desc
     date
-  }
+  } 
 }
 
 mutation updateEvent {
