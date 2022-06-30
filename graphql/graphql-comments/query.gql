@@ -88,10 +88,15 @@ query {
 
 
 
-# add querys
+# mutation querys
 
 mutation addNewUser {
-  createUser(fullName:"Murat") {
+  createUser(
+    data: {
+      fullName: "Ahmet Koper"
+      age: 21
+    }
+  ) {
     id
     fullName
     comments {
@@ -103,10 +108,42 @@ mutation addNewUser {
   }
 }
 
+mutation updateUser {
+  updateUser(
+    id: "1"
+    data: {
+  
+      age: 25
+    }
+    ){
+      id
+      fullName
+      age
+      
+    }
+  }
+
+mutation deleteUser {
+  deleteUser(id: "1"){
+    id
+    fullName
+    age
+  }
+}
+
+mutation deleteAllUser {
+  deleteAllUsers{
+    count
+  }
+}
+  
+
 mutation addNewPost{
   createPost(
-    title: "Bu ikinci post mutation üzerinden eklenmiştir."
-    user_id: "1"
+    data: {
+      title: "Bu cihanın postu"
+    	user_id: "1"
+    }
   ) {
     id
     title
@@ -121,11 +158,50 @@ mutation addNewPost{
   }
 }
 
+mutation updatePost {
+  updatePost(
+    id: "1"
+    data: {
+      title: "Bu güncellenmiş title olarak işlem görecek"
+      user_id: "1"
+    }
+  ){
+    id
+    title
+    user_id
+    user {
+      fullName
+    }
+  }
+}
+
+mutation deletePost {
+  deletePost(id: "1"){
+    id
+    title
+    user_id
+    user {
+      id
+      fullName
+      age
+    }
+  }
+}
+
+mutation deleteAllPosts {
+  deleteAllPosts{
+    count
+  }
+}
+
+
 mutation addComment {
   createComment(
-    text: "Selam nasılsın? burnun kapıya kısılsın v2"
-    user_id: "1"
-    post_id: "1"
+    data: {
+      text: "Selam nasılsın? v2"
+    	user_id: "2"
+    	post_id: "2"
+    }
   ) {
     id
     text
@@ -138,5 +214,45 @@ mutation addComment {
       title
       
     }
+  }
+}
+
+mutation updateComment {
+  updateComment(
+    id: "1"
+    data: {
+      text: "Güncellenmiş yorum"
+    }
+  ) {
+    id
+    text
+    post_id
+    user_id
+    post {
+      id
+      title
+    }
+    user {
+      id
+      fullName
+    }
+  }
+}
+
+mutation deleteComment {
+  deleteComment(id: "3"){
+    id
+    text
+    post {
+      id
+      title
+      user_id
+    }
+  }
+}
+
+mutation deleteAllComments {
+  deleteAllComments{
+    count
   }
 }
