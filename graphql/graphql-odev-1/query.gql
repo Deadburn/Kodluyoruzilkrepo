@@ -85,4 +85,181 @@ query getParticipant {
 
  
 
-  
+# mutation queries
+
+mutation addNewUser {
+  createUser(
+    data: {
+      username: "Deadburn"
+      email: "Cihaom@gmail.com"
+    }
+  ){
+    id
+    username
+    email
+  }
+}
+
+mutation updateUser {
+  updateUser(
+    id: "1",
+    data: {
+      username: "Polat"
+      email: "canpolat@gmail.com"
+    }
+  ){
+    id
+    username
+    email
+  }
+}
+
+mutation deleteUser {
+  deleteUser(id:"1"){
+    id
+    username
+    email
+  }
+}
+
+mutation deleteAllUsers {
+  deleteAllUsers{
+    count
+  }
+}
+
+mutation createEvent {
+  createEvent(
+    data: {
+      title: "new Event"
+      desc: "new event desc"
+      date: "12.01.2021"
+    }
+  ){
+    id
+    title
+    desc
+    date
+  }
+}
+
+mutation updateEvent {
+  updateEvent(
+    id: "1"
+    data: {
+      title: "updated event"
+      desc: "updated event desc"
+      date: "updated event date"
+    }
+  ){
+    id
+    title
+    desc
+    date
+  }
+}
+
+mutation deleteEvent {
+  deleteEvent(
+    id:"1"
+  ) {
+    id
+    title
+    desc
+    date
+  }
+}
+
+mutation deleteAllEvents {
+  deleteAllEvents{
+    count
+  }
+}
+
+mutation createLocation {
+  createLocation(
+    data: {
+      name: "woliva"
+    	desc: "woliva desc"
+      lat: 123.11
+      lng: 12.11
+    }
+  ){
+    id
+    name
+    desc
+  }
+}
+
+mutation updateLocation {
+  updateLocation(
+    id: "AzaNzTBq4O6d6b1RS2BVN"
+    data: {
+      name: "woliva updated"
+      desc:"woliva updated"
+    }
+  ){
+    id
+    name
+    desc
+  }
+}
+
+mutation deleteLocation {
+  deleteLocation(id: "AzaNzTBq4O6d6b1RS2BVN"){
+    id
+    name
+    desc
+    lat
+    lng
+  }
+}
+
+mutation deleteAllLocations {
+  deleteAllLocations{
+    count
+  }
+}
+
+mutation createParticipant {
+  createParticipant(
+    data: {
+      user_id: "1"
+      event_id: "1"
+    }
+  ){
+    id
+    user_id
+    event_id
+  }
+}
+
+mutation updateParticipant {
+  updateParticipant(
+    id:"z0rpdajFoZOb2J-WxyKe-"
+    data: {
+      user_id: "2"
+      event_id:"2"
+    }
+  ){
+    id
+    user_id
+    event_id
+  }
+}
+
+mutation deleteParticipant {
+  deleteParticipant(
+    id:"z0rpdajFoZOb2J-WxyKe-"
+  ){
+    id
+    user_id
+    event_id
+  }
+}
+
+mutation deleteAllParticipants {
+  deleteAllParticipants{
+    count
+  }
+}
