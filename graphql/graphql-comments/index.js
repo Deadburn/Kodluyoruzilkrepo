@@ -5,19 +5,24 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-co
 import { nanoid } from "nanoid";
 
 const typeDefs = gql`
-
   # User type definition
   type User {
     id: ID!
     fullName: String!
+    age: Int!
     posts: [Post!]!
     comments: [Comment!]!
   }
 
   input CreateUserInput {
     fullName: String!
+    age: Int!
   }
 
+  input UpdateUserInput {
+    fullName: String
+    age: Int
+  }
 
   # Post type definition
   type Post {
@@ -33,19 +38,31 @@ const typeDefs = gql`
     user_id: ID!
   }
 
+  input UpdatePostInput {
+    title: String
+    user_id: ID
+  }
+
   # Comment type definition
   type Comment {
     id: ID!
     text: String!
     post_id: ID!
+    user_id: ID!
     user: User!
     post: Post!
   }
 
   input CreateCommentInput {
-    text: String! 
+    text: String!
     post_id: ID!
     user_id: ID!
+  }
+
+  input UpdateCommentInput {
+    text: String
+    post_id: ID
+    user_id: ID
   }
 
   type Query {
@@ -65,27 +82,48 @@ const typeDefs = gql`
   type Mutation {
     # User
     createUser(data: CreateUserInput!): User!
+    updateUser(id: ID!, data: UpdateUserInput!): User!
+
     # Post
     createPost(data: CreatePostInput!): Post!
+    updatePost(id: ID!, data: UpdatePostInput!): Post!
+
     # Comment
     createComment(data: CreateCommentInput!): Comment!
+    updateComment(id: ID!, data: UpdateCommentInput!): Comment!
   }
 `;
 
 const resolvers = {
   Mutation: {
+    // User
     createUser: (parent, { data }) => {
       const user = {
-         id: nanoid(),
-         ...data,
-        };
+        id: nanoid(),
+        ...data,
+      };
 
       users.push(user);
 
       return user;
     },
-    createPost: (parent, { data }) => {
+    updateUser: (parent, { id, data }) => {
+      const user_index = users.findIndex((user) => user.id === id);
 
+      if (user_index === -1) {
+        throw new Error("User not found");
+      }
+
+      const updated_user = (users[user_index] = {
+        ...users[user_index],
+        ...data,
+      });
+
+      return updated_user;
+    },
+
+    // Post
+    createPost: (parent, { data }) => {
       const post = {
         id: nanoid(),
         ...data,
@@ -94,8 +132,23 @@ const resolvers = {
       posts.push(post);
 
       return post;
-
     },
+    updatePost: (parent, { id, data }) => {
+      const post_index = posts.findIndex((post) => post.id === id);
+
+      if (post_index === -1) {
+        throw new Error("Post not found");
+      }
+
+      const updated_post = (posts[post_index] = {
+        ...posts[post_index],
+        ...data,
+      });
+
+      return updated_post;
+    },
+
+    // Comment
     createComment: (parent, { data }) => {
       const comment = {
         id: nanoid(),
@@ -105,7 +158,21 @@ const resolvers = {
       comments.push(comment);
 
       return comment;
-    }
+    },
+    updateComment: (parent, { id, data }) => {
+      const comment_index = comments.findIndex((comment) => comment.id === id);
+
+      if (comment_index === -1) {
+        throw new Error("Comment not found");
+      }
+
+      const updated_comment = (comments[comment_index] = {
+        ...comments[comment_index],
+        ...data,
+      });
+
+      return updated_comment;
+    },
   },
   Query: {
     // user

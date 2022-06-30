@@ -2,10 +2,12 @@ export const users = [
   {
     id: "1",
     fullName: "Cihan Alıcı",
+    age: 25,
   },
   {
     id: "2",
     fullName: "Umut Bozbek",
+    age: 29,
   },
 ];
 
