@@ -256,3 +256,82 @@ mutation deleteAllComments {
     count
   }
 }
+
+
+# Subscription querys
+
+subscription UserCreated {
+  userCreated{
+    id
+    fullName
+    age
+  }
+}
+
+subscription UserUpdated {
+  userUpdated{
+    id
+    fullName
+    age
+  }
+}
+
+subscription UserDeleted {
+  userDeleted{
+    id
+    fullName
+    age
+  }
+}
+
+subscription PostCreated {
+  postCreated(user_id:"1"){
+    id
+    title
+    user_id
+  }
+}
+
+subscription PostCount {
+  postCount
+}
+
+subscription PostUpdated {
+  postUpdated{
+    id
+    title
+    user_id
+  }
+}
+
+subscription PostDeleted {
+  postDeleted{
+    id
+    title
+    user_id
+  }
+}
+
+subscription CommentCreated{
+  commentCreated{
+    id
+    text
+    post_id
+  }
+}
+
+subscription CommentUpdated {
+  commentUpdated{
+    id
+    text
+    post_id
+  }
+}
+
+subscription CommentDeleted {
+  commentDeleted{
+    id
+    text
+    post_id
+  }
+}
