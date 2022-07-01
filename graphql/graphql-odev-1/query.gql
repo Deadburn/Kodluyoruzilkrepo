@@ -263,3 +263,42 @@ mutation deleteAllParticipants {
     count
   }
 }
+
+
+# Subscription Queries
+
+subscription userCreated {
+  userCreated{
+    id
+    username
+    email
+  }
+}
+
+subscription eventCreated {
+  eventCreated(user_id:"1"){
+    id
+    title
+    user_id
+
+  }
+}
+
+subscription participantCreated {
+  participantCreated(user_id:"3"){
+    id
+    user_id
+    event_id
+  }
+}
+
+subscription locationCreated {
+  locationCreated{
+    id
+    name
+    desc
+    lat
+    lng
+  }
+}
+

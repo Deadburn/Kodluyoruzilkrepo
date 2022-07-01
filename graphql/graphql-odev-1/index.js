@@ -1,9 +1,9 @@
-import { ApolloServer, gql } from "apollo-server";
+import { GraphQLServer, withFilter } from "graphql-yoga";
 import { users, participants, events, locations } from "./data.js";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { nanoid } from "nanoid";
+import pubsub from "./pubsub.js"
 
-const typeDefs = gql`
+const typeDefs = `
   # id, username, email
   type User {
     id: ID!
@@ -40,12 +40,14 @@ const typeDefs = gql`
     title: String!
     desc: String!
     date: String!
+    user_id: ID!
   }
 
   input UpdateEventInput {
     title: String
     desc: String
     date: String
+    user_id: ID
   }
 
   # id name desc lat lng
@@ -136,22 +138,102 @@ const typeDefs = gql`
     deleteAllParticipants: DeleteAllOutput!
 
   }
+
+  type Subscription {
+    userCreated: User!
+    userUpdated: User!
+    userDeleted: User!
+
+    eventCreated(user_id: ID): Event!
+    eventUpdated: Event!
+    eventDeleted: Event!
+
+    locationCreated: Location!
+    locationUpdated: Location!
+    locationDeleted: Location!
+
+    participantCreated(user_id: ID): Participant!
+    participantUpdated: Participant!
+    participantDeleted: Participant!
+
+  }
 `;
 
 const resolvers = {
+  Subscription: {
+    // User
+    userCreated: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('userCreated')
+    },
+    userUpdated: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('userUpdated')
+    },
+    userDeleted: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('userDeleted')
+    },
+
+    // Event
+    eventCreated: {
+      subscribe: withFilter(
+        (_, __, { pubsub}) => pubsub.asyncIterator('eventCreated'),
+        (payload, variables) => {
+          // console.log("Payload", payload)
+          // console.log("variables", variables)
+
+          return variables.user_id ? (payload.eventCreated.user_id === variables.user_id) : true
+        }
+      )
+    },
+    eventUpdated: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('eventUpdated')
+    },
+    eventDeleted: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('eventDeleted')
+    },
+
+    // Location
+    locationCreated: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('locationCreated')
+    },
+    locationUpdated: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('locationUpdated')
+    },
+    locationDeleted: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('locationDeleted')
+    },
+
+    // Participant
+    participantCreated: {
+      subscribe: withFilter(
+        (_, __, { pubsub}) => pubsub.asyncIterator('participantCreated'),
+        (payload, variables) => {
+
+          return variables.user_id ? (payload.participantCreated.user_id === variables.user_id) : true
+        }
+      )
+    },
+    participantUpdated: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('participantUpdated')
+    },
+    participantDeleted: {
+      subscribe: (_, __, { pubsub}) => pubsub.asyncIterator('participantDeleted')
+    }
+
+  },
   Mutation: {
     // User
-    createUser: (parent, { data }) => {
+    createUser: (parent, { data }, { pubsub}) => {
       const user = {
         id: nanoid(),
         ...data,
       };
 
       users.push(user);
+      pubsub.publish('userCreated', { userCreated: user});
 
       return user;
     },
-    updateUser: (parent, { id, data }) => {
+    updateUser: (parent, { id, data }, { pubsub }) => {
       const user_index = users.findIndex((user) => user.id.toString() === id.toString());
 
       if (user_index === -1) {
@@ -162,10 +244,11 @@ const resolvers = {
         ...users[user_index],
         ...data,
       });
+      pubsub.publish('userUpdated', { userUpdated: updated_user });
 
       return updated_user;
     },
-    deleteUser: (parent, { id }) => {
+    deleteUser: (parent, { id }, { pubsub}) => {
       const user_index = users.findIndex((user) => user.id.toString() === id.toString());
 
       if (user_index === -1) {
@@ -174,6 +257,8 @@ const resolvers = {
 
       const deleted_user = users[user_index];
       users.splice(user_index, 1);
+      
+      pubsub.publish('userDeleted', { userDeleted: deleted_user });
 
       return deleted_user;
     },
@@ -185,17 +270,18 @@ const resolvers = {
         count: length,
       };
     },
-    createEvent: (parent, { data}) => {
+    createEvent: (parent, { data}, { pubsub }) => {
       const event = {
         id: nanoid(),
         ...data
       };
 
       events.push(event);
-      
+      pubsub.publish('eventCreated', { eventCreated: event });
+
       return event;
     },
-    updateEvent: (parent, { id, data}) => {
+    updateEvent: (parent, { id, data}, { pubsub}) => {
       const event_index = events.findIndex((event) => event.id.toString() === id.toString())
 
       if (event_index === -1) {
@@ -206,11 +292,12 @@ const resolvers = {
         ...events[event_index],
         ...data
       };
+      pubsub.publish('eventUpdated', { eventUpdated: updated_event });
 
       return updated_event;
 
     },
-    deleteEvent: (parent, { id}) => {
+    deleteEvent: (parent, { id}, { pubsub }) => {
       const event_index = events.findIndex((event) => event.id.toString() === id.toString())
 
       if(event_index === -1) {
@@ -219,6 +306,7 @@ const resolvers = {
 
       const deleted_event = events[event_index];
       events.splice(event_index, 1);
+      pubsub.publish('eventDeleted', { eventDeleted: deleted_event });
 
       return deleted_event;
 
@@ -233,17 +321,18 @@ const resolvers = {
     },
 
     // Location
-    createLocation: (parent, { data}) => {
+    createLocation: (parent, { data}, { pubsub }) => {
       const location = {
         id: nanoid(),
         ...data
       };
 
       locations.push(location);
+      pubsub.publish('locationCreated', { locationCreated: location });
 
       return location;
     },
-    updateLocation: (parent, { id, data }) => {
+    updateLocation: (parent, { id, data }, { pubsub }) => {
       const location_index = locations.findIndex((location) => location.id.toString() === id.toString())
 
       if(location_index === -1) {
@@ -254,16 +343,18 @@ const resolvers = {
         ...locations[location_index],
         ...data
       }
+      pubsub.publish('locationUpdated', { locationUpdated: updated_location });
 
       return updated_location
 
 
     },
-    deleteLocation: (parent, { id}) => {
+    deleteLocation: (parent, { id}, { pubsub }) => {
       const location_index = locations.findIndex((location) => location.id.toString() === id.toString())
 
       const deleted_locations = locations[location_index];
       locations.splice(location_index, 1);
+      pubsub.publish('locationDeleted', { locationDeleted: deleted_locations });
 
       return deleted_locations;
 
@@ -276,17 +367,18 @@ const resolvers = {
         count: length
       }
     },
-    createParticipant: (parent, { data }) => {
+    createParticipant: (parent, { data }, { pubsub }) => {
       const participant = {
         id: nanoid(),
         ...data
       };
 
       participants.push(participant);
+      pubsub.publish('participantCreated', { participantCreated: participant });
 
       return participant;
     },
-    updateParticipant: (parent, { id, data }) => {
+    updateParticipant: (parent, { id, data }, { pubsub }) => {
       const participant_index = participants.findIndex((participant) => participant.id.toString() === id.toString())
 
       if(participant_index === -1) {
@@ -297,11 +389,12 @@ const resolvers = {
         ...participants[participant_index],
         ...data
       }
+      pubsub.publish('participantUpdated', { participantUpdated: updated_participant });
 
       return updated_participant;
 
     },
-    deleteParticipant: (parent, { id }) => {
+    deleteParticipant: (parent, { id }, { pubsub }) => {
       const participant_index = participants.findIndex((participant) => participant.id.toString() === id.toString())
 
       if(participant_index === -1) {
@@ -310,6 +403,7 @@ const resolvers = {
 
       const deleted_participant = participants[participant_index];
       participants.splice(participant_index, 1);
+      pubsub.publish('participantDeleted', { participantDeleted: deleted_participant });
 
       return deleted_participant;
 
@@ -364,16 +458,12 @@ const resolvers = {
   },
 };
 
-const server = new ApolloServer({
+const server = new GraphQLServer({
   typeDefs,
   resolvers,
-  plugins: [
-    ApolloServerPluginLandingPageGraphQLPlayground({
-      // options
-    }),
-  ],
+  context: {
+    pubsub,
+  },
 });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+server.start(() => console.log("Server is running on localhost:4000"));
