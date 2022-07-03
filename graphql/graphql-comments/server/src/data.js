@@ -1,4 +1,4 @@
-export const users = [
+const users = [
   {
     id: "1",
     fullName: "Cihan Alıcı",
@@ -11,7 +11,7 @@ export const users = [
   },
 ];
 
-export const posts = [
+const posts = [
   {
     id: "1",
     title: "Cihan'ın gönderisi",
@@ -29,7 +29,7 @@ export const posts = [
   },
 ];
 
-export const comments = [
+const comments = [
   {
     id: "1",
     text: "Bu umutun yorumudur",
@@ -56,3 +56,8 @@ export const comments = [
   },
 ];
 
+export default {
+  users, 
+  posts, 
+  comments
+}
