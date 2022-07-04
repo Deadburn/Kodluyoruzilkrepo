@@ -5,6 +5,7 @@ import Loading from "components/Loading";
 
 import styles from "./styles.module.css";
 import { Typography, Image } from "antd";
+import Comments from "./Comments";
 const { Title } = Typography;
 
 function Post() {
@@ -24,8 +25,6 @@ function Post() {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log(data);
-
   const { post } = data;
 
   return (
@@ -33,6 +32,8 @@ function Post() {
       <Title level={3}>{post.title}</Title>
       <Image width={200} src={post.cover} />
       <div className={styles.description}>{post.short_description}</div>
+    
+      <Comments post_id={id} />
     </div>
   );
 }
