@@ -2,7 +2,6 @@ import { nanoid } from "nanoid";
 
 
 export const Mutation = {
-  // User
   // Parent'ı kullanmadıgımız için _ diye bir değişken oluşturduk
   createUser: (_, { data }, { pubsub, db }) => {
     const user = {
@@ -44,7 +43,7 @@ export const Mutation = {
 
     return deleted_user;
   },
-  deleteAllUsers: (_, __, { db}) => {
+  deleteAllUsers: (_, __, { pubsub, db}) => {
     const length = db.users.length;
     db.users.splice(0, length);
 
@@ -146,7 +145,7 @@ export const Mutation = {
 
     return deleted_comment;
   },
-  deleteAllComments: (_, __, {db}) => {
+  deleteAllComments: (_, __, {pubsub, db}) => {
     const length = db.comments.length;
     db.comments.splice(0, length);
 

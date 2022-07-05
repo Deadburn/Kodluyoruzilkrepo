@@ -1,7 +1,7 @@
 export const Query = {
   // user
   users: (_, __, { db }) => db.users,
-  user: (_, args, { db}) => db.users.find((user) => user.id === args.id),
+  user: (_, args, { db }) => db.users.find((user) => user.id === args.id),
 
   // post
   posts: (_, __, { db }) => db.posts,
@@ -9,7 +9,6 @@ export const Query = {
 
   // comment
   comments: (_, __, { db }) => db.comments,
-  comment: (_, args, { db }) => db.comments.find((comment) => comment.id === args.id),
+  comment: (_, args, { db }) =>
+    db.comments.find((comment) => comment.id === args.id),
 };
-
-

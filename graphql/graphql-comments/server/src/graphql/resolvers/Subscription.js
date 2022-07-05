@@ -1,5 +1,4 @@
-import  { withFilter } from 'graphql-yoga'
-
+import { withFilter } from "graphql-yoga";
 
 export const Subscription = {
   // User
@@ -61,5 +60,3 @@ export const Subscription = {
     subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("commentDeleted"),
   },
 };
-
-
