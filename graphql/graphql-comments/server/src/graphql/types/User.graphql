@@ -16,7 +16,6 @@ type Subscription {
   userDeleted: User!
 }
 
-# User type definition
 type User {
   id: ID!
   fullName: String!

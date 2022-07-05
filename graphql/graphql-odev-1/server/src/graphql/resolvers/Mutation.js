@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 
 
 export const Mutation = {
-  // Parent'ı kullanmadıgımız için _ diye bir değişken oluşturduk
+  // User
   createUser: (_, { data }, { pubsub, db }) => {
     const user = {
       id: nanoid(),

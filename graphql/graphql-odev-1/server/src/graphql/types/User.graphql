@@ -4,16 +4,16 @@ type Query {
 }
 
 type Mutation {
-    createUser(data: CreateUserInput!): User!
-    updateUser(id: ID!, data: UpdateUserInput!): User!
-    deleteUser(id: ID!): User!
-    deleteAllUsers: DeleteAllOutput!
+  createUser(data: CreateUserInput!): User!
+  updateUser(id: ID!, data: UpdateUserInput!): User!
+  deleteUser(id: ID!): User!
+  deleteAllUsers: DeleteAllOutput!
 }
 
-type Subscription { 
-    userCreated: User!
-    userUpdated: User!
-    userDeleted: User!
+type Subscription {
+  userCreated: User!
+  userUpdated: User!
+  userDeleted: User!
 }
 
 type User {
