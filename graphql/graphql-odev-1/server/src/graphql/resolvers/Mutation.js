@@ -14,7 +14,7 @@ export const Mutation = {
 
     return user;
   },
-  updateUser: (parent, { id, data }, { pubsub, db }) => {
+  updateUser: (_, { id, data }, { pubsub, db }) => {
     const user_index = db.users.findIndex(
       (user) => user.id.toString() === id.toString()
     );
@@ -31,7 +31,7 @@ export const Mutation = {
 
     return updated_user;
   },
-  deleteUser: (parent, { id }, { pubsub, db }) => {
+  deleteUser: (_, { id }, { pubsub, db }) => {
     const user_index = db.users.findIndex(
       (user) => user.id.toString() === id.toString()
     );
@@ -41,7 +41,6 @@ export const Mutation = {
     }
 
     const deleted_user = db.users[user_index];
-    db.
     db.users.splice(user_index, 1);
 
     pubsub.publish("userDeleted", { userDeleted: deleted_user });

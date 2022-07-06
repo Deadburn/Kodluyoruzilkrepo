@@ -3,7 +3,10 @@ import { withFilter } from "graphql-yoga";
 export const Subscription = {
   // User
   userCreated: {
-    subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("userCreated"),
+    subscribe: (_, __, { pubsub }) => {
+      console.log("_")
+      return  pubsub.asyncIterator("userCreated")
+    },
   },
   userUpdated: {
     subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("userUpdated"),
