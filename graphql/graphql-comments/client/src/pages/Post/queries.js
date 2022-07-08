@@ -1,7 +1,5 @@
 import { gql } from "@apollo/client";
 
-
-
 export const GET_POST = gql`
   query getPost($id: ID!) {
     post(id: $id) {
@@ -18,30 +16,33 @@ export const GET_POST = gql`
   }
 `;
 
-export const GET_POST_COMMENTS = gql`
-  query getComments($id: ID!){
-  post(id: $id) {
-    comments{
-      id
-      text
-      user {
-        fullName
-        profile_photo
-      }
-    }
-  }
-}`;
-
-export const COMMENTS_SUBSCRIPTIONS = gql`
-  subscription CommentCreated($post_id: ID) {
-  commentCreated(post_id: $post_id){
+const commentFragment = gql`
+  fragment CommentFragment on Comment {
     id
     text
-    post_id
     user {
       fullName
       profile_photo
     }
   }
-}
+`;
+
+export const GET_POST_COMMENTS = gql`
+  query getComments($id: ID!) {
+    post(id: $id) {
+      comments {
+        ...CommentFragment
+      }
+    }
+  }
+  ${commentFragment}
+`;
+
+export const COMMENTS_SUBSCRIPTIONS = gql`
+  subscription CommentCreated($post_id: ID) {
+    commentCreated(post_id: $post_id) {
+      ...CommentFragment
+    }
+  }
+  ${commentFragment}
 `;

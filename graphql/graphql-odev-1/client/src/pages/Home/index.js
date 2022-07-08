@@ -1,15 +1,30 @@
-import React from "react";
+import { useEffect } from "react";
 import { List } from "antd";
 import { useQuery } from "@apollo/client";
-
 import { Link } from "react-router-dom";
-
 import styles from "./styles.module.css";
-import { GET_EVENTS } from "./queries";
+import { GET_EVENTS, EVENT_SUBSCRIPTION } from "./queries";
 import Loading from "components/Loading";
 
+
 function Home() {
-  const { loading, error, data } = useQuery(GET_EVENTS);
+  const { loading, error, data, subscribeToMore } = useQuery(GET_EVENTS);
+
+  useEffect(() => {
+    subscribeToMore({
+      document: EVENT_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        console.log("bruh",subscriptionData.data);
+        console.log("prev", prev)
+        
+        // return {
+        //   events: [subscriptionData.data.eventCreated, ...prev.events]
+        // }
+
+      }
+    })
+  },[subscribeToMore])
 
   if (loading) {
     return <Loading />;
@@ -19,7 +34,6 @@ function Home() {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log(data);
 
   return (
     <div>
