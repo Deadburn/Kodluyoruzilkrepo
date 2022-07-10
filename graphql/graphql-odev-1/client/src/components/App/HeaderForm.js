@@ -3,8 +3,9 @@ import moment from 'moment';
 import { Button, Form, Input, DatePicker, message } from 'antd';
 import { useMutation } from "@apollo/client";
 import styles from "./styles.module.css";
+import { ADD_EVENT } from "./queries";
 
-import { ADD_EVENT } from "../../pages/Home/queries";
+
 
 function HeaderForm() {
     const [saveEvent, { loading }] = useMutation(ADD_EVENT);

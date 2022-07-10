@@ -6,7 +6,6 @@ import styles from "./styles.module.css";
 import { GET_EVENTS, EVENT_SUBSCRIPTION } from "./queries";
 import Loading from "components/Loading";
 
-
 function Home() {
   const { loading, error, data, subscribeToMore } = useQuery(GET_EVENTS);
 
@@ -14,17 +13,14 @@ function Home() {
     subscribeToMore({
       document: EVENT_SUBSCRIPTION,
       updateQuery: (prev, { subscriptionData }) => {
-        if (!subscriptionData.data) return prev;
-        console.log("bruh",subscriptionData.data);
-        console.log("prev", prev)
-        
-        // return {
-        //   events: [subscriptionData.data.eventCreated, ...prev.events]
-        // }
+        console.log(subscriptionData);
 
-      }
-    })
-  },[subscribeToMore])
+        return {
+          events: [subscriptionData.data.eventCreated, ...prev.events],
+        };
+      },
+    });
+  }, [subscribeToMore]);
 
   if (loading) {
     return <Loading />;
@@ -33,7 +29,6 @@ function Home() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
 
   return (
     <div>
@@ -48,25 +43,27 @@ function Home() {
             <List.Item.Meta
               //   avatar={<Avatar src={item.user.profile_photo} />}
               title={
-                (<div className={`${styles.flexion}`}><Link to={`/event/${item.id}`} className={`${styles.listTitle}`}>
-                  {item.title}
-                </Link>
-                  <p>{item.date }</p>
-                  </div>
-                  )
+                <div className={`${styles.flexion}`}>
+                  <Link
+                    to={`/event/${item.id}`}
+                    className={`${styles.listTitle}`}
+                  >
+                    {item.title}
+                  </Link>
+                  <p>{item.date}</p>
+                </div>
               }
-                  description={
-                    <Link to={`/event/${item.id}`} className={styles.listItem}>
-                      {item.desc}
-                    </Link>
-                  }
+              description={
+                <Link to={`/event/${item.id}`} className={styles.listItem}>
+                  {item.desc}
+                </Link>
+              }
             />
-
-                </List.Item>
-                )}
-            />
-          </div>
-        );
+          </List.Item>
+        )}
+      />
+    </div>
+  );
 }
 
-      export default Home;
+export default Home;

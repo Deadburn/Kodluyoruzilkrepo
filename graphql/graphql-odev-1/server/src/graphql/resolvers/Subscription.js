@@ -4,8 +4,7 @@ export const Subscription = {
   // User
   userCreated: {
     subscribe: (_, __, { pubsub }) => {
-      console.log("_")
-      return  pubsub.asyncIterator("userCreated")
+      return pubsub.asyncIterator("userCreated");
     },
   },
   userUpdated: {

@@ -1,11 +1,12 @@
 import React from "react";
-import { GET_EVENT } from "../Home/queries";
+
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import Loading from "components/Loading";
 
 import styles from "./styles.module.css";
 import { Typography } from "antd";
+import { GET_EVENT } from "./queries";
 const { Title } = Typography;
 
 function Event() {
